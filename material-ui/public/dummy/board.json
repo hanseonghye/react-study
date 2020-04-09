@@ -1,0 +1,10 @@
+{
+  "board" :
+    {
+      "id": 1,
+      "title" : "title1",
+      "created_date":"20200303",
+      "content" : "aaaaaaaaaaa"
+    }
+
+}
