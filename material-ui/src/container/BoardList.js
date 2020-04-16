@@ -5,14 +5,36 @@ import TableHead from '@material-ui/core/TableHead'
 import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
-import Collapsible from 'react-collapsible'
-
 import ViewBoard from 'component/viewBoard'
+import axios from 'axios'
 
 class BoardList extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      content : ''
+    }
+  }
+
+
+  _viewBoard = () => {
+    // const apiUrl = 'http://localhost:8080/boards/' + this.props.boardId
+    const apiUrl = 'dummy/board.json'
+
+    axios.get(apiUrl)
+      .then(data => {
+        this.setState(() => ( {content : data.data.board.content}))
+      })
+      .catch(error => {
+      console.log(error)
+      })
+  }
+
 
   render() {
     return (
+      <div>
       <Paper>
         <Table>
           <TableHead>
@@ -23,20 +45,18 @@ class BoardList extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.boards.map(board => (
-              <TableRow onClick={this.viewBoard}>
+            {this.props.boards.map((board, index) => (
+              <TableRow onClick={this._viewBoard} key={index}>
                 <TableCell>{board.id}</TableCell>
-                <TableCell>
-                  <Collapsible trigger={board.title}>
-                    <ViewBoard boardId={board.id}></ViewBoard>
-                  </Collapsible>
-                </TableCell>
+                <TableCell>{board.title}</TableCell>
                 <TableCell>{board.created_date}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </Paper>
+      <ViewBoard content={this.state.content}></ViewBoard>
+      </div>
     )
   }
 }

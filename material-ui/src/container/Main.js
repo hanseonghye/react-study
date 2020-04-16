@@ -11,7 +11,7 @@ class Main extends Component {
       boardList: []
     }
   }
-  
+
 
   componentDidMount() {
     this._getBoards()
@@ -19,6 +19,7 @@ class Main extends Component {
 
 
   _getBoards() {
+    // const apiUrl = 'http://localhost:8080/boards/'
     const apiUrl = 'dummy/boardlist.json'
 
     axios.get(apiUrl)
@@ -30,7 +31,7 @@ class Main extends Component {
       .catch(error => {
       console.log(error)
       })
-    
+
   }
 
 

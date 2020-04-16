@@ -2,17 +2,6 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 
-// const AddBoard = () => {
-//   return (
-//     <div>
-//       <input placeholder="title" />
-//       <input placeholder="contenxt" />
-//       <button onClick={saveBoard()}>저장</button>
-//     </div>
-//   )
-// }
-
-
 class AddBoard extends Component {
   constructor(props) {
     super(props)
@@ -26,6 +15,18 @@ class AddBoard extends Component {
   }
   
   handleSubmit() {
+    const apiUrl = 'http://localhost:8080/boards'
+
+    axios.post(apiUrl,{
+      title:this.state.title,
+      content:this.state.content
+    })
+      .then(data => {
+        console.log(data)
+      })
+      .catch(error => {
+      console.log(error)
+      })
 
   }
 
